@@ -1,0 +1,131 @@
+{
+  "name": "k8-pc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development",
+    "install": "electron-rebuild",
+    "prod": "webpack --mode production",
+    "build": "npm run prod && electron-builder",
+    "test:lint": "eslint . --ext .js,.jsx"
+  },
+  "browserslist": [
+    "last 3 versions",
+    "Safari >= 8",
+    "iOS >= 8"
+  ],
+  "build": {
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://static.robobloq.cn/apps/k8-pc/"
+      }
+    ],
+    "appId": "com.robobloq.k8",
+    "productName": "K8",
+    "copyright": "Copyright © 2017 Robobloq",
+    "fileAssociations": {
+      "ext": "k8",
+      "name": "K8"
+    },
+    "directories": {
+      "output": "./releases"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "./build/icons/icon.icns",
+      "category": "Utility"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "./build/icons/icon.ico"
+    },
+    "nsis": {
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "oneClick": false,
+      "artifactName": "${productName}-Setup-${version}.${ext}"
+    },
+    "linux": {
+      "target": [
+        "deb"
+      ],
+      "icon": "./build/icons",
+      "category": "Utility"
+    },
+    "files": [
+      "main.js",
+      "dist/**",
+      "node_modules"
+    ],
+    "extraResources": [
+      {
+        "from": "./dist/static",
+        "to": "./static",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "autoprefixer": "^9.4.3",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^8.0.2",
+    "copy-webpack-plugin": "^4.6.0",
+    "css-loader": "^1.0.0",
+    "electron": "7.0.0",
+    "electron-builder": "21.2.0",
+    "electron-rebuild": "^1.8.8",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-scratch": "^5.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.5.1",
+    "ghooks": "^2.0.4",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.3",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-simple-vars": "^5.0.1",
+    "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1",
+    "webpack-dev-server": "^3.1.9"
+  },
+  "dependencies": {
+    "drivelist": "^8.0.9",
+    "electron-is-dev": "^1.1.0",
+    "lodash.bindall": "^4.4.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.0"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run test:lint"
+    }
+  }
+}
